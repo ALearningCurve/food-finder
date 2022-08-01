@@ -1,6 +1,7 @@
 import { useState } from 'react';
+import QueryData from '../interfaces/QueryData';
 
-export default function LocationSearch({ callback }: { callback: () => any }) {
+export default function LocationSearch({ callback }: { callback: (_: QueryData) => any }) {
     const foodCategories = [
         "Any",
         "American",
@@ -34,12 +35,11 @@ export default function LocationSearch({ callback }: { callback: () => any }) {
         const type = values.type.value;
         const price = values.price.value;
         const rating = values.rating.value;
-
-        console.log({
-            "type": type,
-            "price": price,
-            "rating": rating
-        })
+        callback({
+            type: type,
+            price: price,
+            rating: rating
+        });
     };
 
     return (
@@ -78,7 +78,6 @@ export default function LocationSearch({ callback }: { callback: () => any }) {
 
                 <div className='flex items-center justify-center mt-5'>
                     <button className='block text-m text-white shadow border rounded bg-blue-500 focus:shadow-outline p-2' type="submit" value="Submit"> Lets Eat! </button>
-
                 </div>
             </form>
         </div>

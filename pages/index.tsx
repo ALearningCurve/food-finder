@@ -4,16 +4,30 @@ import Image from 'next/image'
 import Layout from '../components/layout'
 import styles from '../styles/Home.module.css'
 import LocationSearch from '../components/locationSearch'
+import { useState } from 'react'
+import QueryData from '../interfaces/QueryData'
+
 const Home: NextPage = () => {
+  const [queryData, setQueryData] = useState<QueryData>();
   return (
     <Layout home>
       <div>
-        <h3>Where to Eat?</h3>
-        <p>Fill out this form to find out</p>
-        <LocationSearch callback={() => null}></LocationSearch>
+        <div className='mb-5'>
+
+          <h1 className='text-2xl leading-loose font-extrabold'>Where to Eat?</h1>
+          <p className='text-grey-800'>Fill out this form to find out</p>
+        </div>
+        <div className="flex flex-col items-center justify-center">
+          <LocationSearch callback={(_: QueryData) => setQueryData(_)}></LocationSearch>
+          {queryData && <hr className='border-t-8 bg-black w-12 h-1' />}
+        </div>
+
       </div>
     </Layout>
   )
 }
 
 export default Home
+
+
+

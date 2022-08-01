@@ -3,7 +3,7 @@ import Header from './header';
 
 
 export default function Layout({ children, home }: { children: JSX.Element, home: boolean }) {
-    return <div className="container">
+    return <div>
         <Head>
             <title>Where to Eat</title>
             <meta name="description" content="Food Finder" />
@@ -13,7 +13,10 @@ export default function Layout({ children, home }: { children: JSX.Element, home
             <Header></Header>
         </header>
         <main className='min-h-screen p-3'>
-            {children}
+            <div className='container'>
+                {children}
+
+            </div>
         </main>
     </div>;
 }
