@@ -18,13 +18,14 @@ export default async function handler(
         return
     }
 
+    let body = req.body;
 
-    const body = JSON.parse(req.body)
 
     if (body == null || !isQueryData(body)) {
         res.status(400).send({ errorMessage: 'expected body to be of type QueryData' })
         return
     }
+
 
     const q = "Dunkin";
     const l = "42.493160,-71.564568";
