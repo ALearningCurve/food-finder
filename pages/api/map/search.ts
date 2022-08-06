@@ -1,12 +1,31 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { ErrorMessage } from '../../interfaces/ErrorMessage';
-import { Locations, Location } from '../../interfaces/Location'
+import { ErrorMessage } from '../../../interfaces/ErrorMessage';
+import { Location } from '../../../interfaces/Location'
+import QueryData, { isQueryData } from '../../../interfaces/QueryData'; { }
 
-
+/**
+ * The api needs to use post because we want all the search query parameters from the client.
+ * To put all this information into specific routes is tedious. Therefore, even though this is a 
+ * method that GETs information from the maps api, it should be accessed with post or the like
+ */
 export default async function handler(
     req: NextApiRequest,
-    res: NextApiResponse<Locations | ErrorMessage>
+    res: NextApiResponse<{ locations: Location[] } | ErrorMessage>
 ) {
+
+    if (req.method !== 'POST') {
+        res.status(405).send({ errorMessage: 'Only POST requests allowed' });
+        return
+    }
+
+
+    const body = JSON.parse(req.body)
+
+    if (body == null || !isQueryData(body)) {
+        res.status(400).send({ errorMessage: 'expected body to be of type QueryData' })
+        return
+    }
+
     const q = "Dunkin";
     const l = "42.493160,-71.564568";
     const url = `${process.env.BING_SEARCH_URL}?query=${q}&userLocation=${l}&key=${process.env.BING_KEY}`;

@@ -15,8 +15,3 @@ export interface Address {
     postalCode: string
 }
 
-
-export interface Locations {
-    locations: Location[]
-}
-

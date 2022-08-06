@@ -6,9 +6,14 @@ import styles from '../styles/Home.module.css'
 import LocationSearch from '../components/locationSearch'
 import { useState } from 'react'
 import QueryData from '../interfaces/QueryData'
+import LocationResults from '../components/locationResults'
+import { Location } from '../interfaces/Location'
+
+
 
 const Home: NextPage = () => {
   const [queryData, setQueryData] = useState<QueryData>();
+
   return (
     <Layout home>
       <div>
@@ -19,9 +24,13 @@ const Home: NextPage = () => {
         </div>
         <div className="flex flex-col items-center justify-center">
           <LocationSearch callback={(_: QueryData) => setQueryData(_)}></LocationSearch>
-          {queryData && <hr className='border-t-8 bg-black w-12 h-1' />}
+          {queryData &&
+            <>
+              <hr className='border-t-8 bg-black w-12 h-1' />
+              <LocationResults queryData={queryData}></LocationResults>
+            </>
+          }
         </div>
-
       </div>
     </Layout>
   )
