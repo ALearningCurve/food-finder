@@ -20,7 +20,6 @@ export default async function handler(
 
     let body = req.body;
 
-    console.log(body)
     if (body == null || !isQueryData(body)) {
         res.status(400).send({ errorMessage: 'expected body to be of type QueryData' })
         return
@@ -49,12 +48,11 @@ export default async function handler(
                 name: res.name,
                 phone: res.PhoneNumber,
                 website: res.Website,
-                coordinates: res.geocodePoints.coordinates,
-                address: res.address
+                coordinates: res["point"]["coordinates"],
+                address: res["Address"]
             }
         });
         // map the returned JSON to our data type so that it can be displayed in the browser
-
         res.status(200).json({ locations: convertedResults });
     } catch (error: any) {
         if (error instanceof Error) error = error.message;
