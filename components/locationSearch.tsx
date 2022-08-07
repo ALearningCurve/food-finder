@@ -2,31 +2,10 @@ import { useState } from 'react';
 import QueryData from '../interfaces/QueryData';
 
 export default function LocationSearch({ callback }: { callback: (_: QueryData) => any }) {
-    const foodCategories = [
-        "Any",
-        "American",
-        "Asian",
-        "Barbecue",
-        "Buffet",
-        "Burgers",
-        "Chinese",
-        "Fast Food",
-        "French",
-        "Indian",
-        "Italian",
-        "Japanese",
-        "Korean",
-        "Mediterranean",
-        "Mexican",
-        "Pizzeria",
-        "Seafood",
-        "Steak House",
-        "Sushi",
-        "Thai"
-    ];
+
+
 
     // Make a copy of the categories and copy it
-    const [count, setCount] = useState(foodCategories.map(d => d));
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
@@ -37,7 +16,7 @@ export default function LocationSearch({ callback }: { callback: (_: QueryData) 
         const rating = values.rating.value;
         // TODO use browser api to find out where we are
         callback({
-            type: type,
+            onlyVegetarian: false,
             price: price,
             rating: rating,
             location: "42.493160,-71.564568"
@@ -47,7 +26,7 @@ export default function LocationSearch({ callback }: { callback: (_: QueryData) 
     return (
         <div className="w-full max-w-xs">
             <form className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4' onSubmit={handleSubmit}>
-                <div className="mb-3">
+                {/* <div className="mb-3">
                     <label className='block text-gray-700 text-m font-bold mb-2' htmlFor='type'>
                         Type:
                     </label>
@@ -56,7 +35,7 @@ export default function LocationSearch({ callback }: { callback: (_: QueryData) 
                             return <option defaultValue={name} key={name}>{name}</option>;
                         })}
                     </select>
-                </div>
+                </div> */}
                 <div className="mb-3">
 
                     <label className='block text-gray-700 text-m font-bold mb-2' htmlFor='rating'>

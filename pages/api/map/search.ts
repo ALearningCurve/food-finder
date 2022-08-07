@@ -25,10 +25,16 @@ export default async function handler(
         return
     }
 
+    const allResults: Location[] = []
+    const type = body.onlyVegetarian ? "VegetarianAndVeganRestaurants" : "EatDrink,TakeAway,FastFood";
+    let location = "userLocation=" + body.location;
+    if ("locatedWithin" in body) {
+        const max = 5000;
+        location = "userCircularMapView=" + body.location + "," + Math.min(Math.round(body.locatedWithin ?? max), max)
+    }
 
-    const q = "Coffee";
-    const l = "42.493160,-71.564568";
-    const url = `${process.env.BING_SEARCH_URL}?query=${q}&userLocation=${l}&key=${process.env.BING_KEY}`;
+    const url = `${process.env.BING_SEARCH_URL}?type=${type}&${location}&key=${process.env.BING_KEY}`;
+
     try {
         const bingRes = await fetch(url);
         // if the fetch fails for any reason return error
@@ -43,19 +49,21 @@ export default async function handler(
         // convert our results array into the interface type that we defined for 
         // results
 
-        const convertedResults: Location[] = results.map((res) => {
-            return {
+        results.forEach((res) => {
+            allResults.push({
                 name: res.name,
                 phone: res.PhoneNumber,
                 website: res.Website,
                 coordinates: res["point"]["coordinates"],
                 address: res["Address"]
-            }
+            })
         });
         // map the returned JSON to our data type so that it can be displayed in the browser
-        res.status(200).json({ locations: convertedResults });
     } catch (error: any) {
         if (error instanceof Error) error = error.message;
         res.status(500).send({ errorMessage: String(error) });
     }
+    // };
+    res.status(200).json({ locations: allResults });
+
 }
