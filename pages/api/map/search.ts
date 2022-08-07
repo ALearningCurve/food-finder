@@ -26,7 +26,7 @@ export default async function handler(
     }
 
 
-    const q = "Dunkin";
+    const q = "Coffee";
     const l = "42.493160,-71.564568";
     const url = `${process.env.BING_SEARCH_URL}?query=${q}&userLocation=${l}&key=${process.env.BING_KEY}`;
     try {
