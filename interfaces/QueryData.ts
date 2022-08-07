@@ -2,7 +2,7 @@ interface QueryData {
     type: String,
     price: String,
     rating: String,
-    location?: any
+    location: any
 }
 
 export default QueryData;

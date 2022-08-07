@@ -35,10 +35,12 @@ export default function LocationSearch({ callback }: { callback: (_: QueryData) 
         const type = values.type.value;
         const price = values.price.value;
         const rating = values.rating.value;
+        // TODO use browser api to find out where we are
         callback({
             type: type,
             price: price,
-            rating: rating
+            rating: rating,
+            location: "42.493160,-71.564568"
         });
     };
 
