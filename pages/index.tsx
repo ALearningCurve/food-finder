@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react'
 import QueryData from '../interfaces/QueryData'
 import LocationResults from '../components/locationResults'
 import { Location } from '../interfaces/Location'
+import Toggle from '../components/toggle'
 
 
 
@@ -22,7 +23,8 @@ const Home: NextPage = () => {
           <h1 className='text-2xl leading-loose font-extrabold'>Where to Eat?</h1>
           <p className='text-grey-800'>Fill out this form to find out</p>
         </div>
-        <div className="flex flex-col items-center justify-center">
+        <Toggle visable={!queryData} name="Search Options">
+          {/* <div className="flex flex-col items-center justify-center"> */}
           <LocationSearch callback={(_: QueryData) => setQueryData(_)}></LocationSearch>
           {queryData &&
             <>
@@ -30,7 +32,8 @@ const Home: NextPage = () => {
               <LocationResults queryData={queryData}></LocationResults>
             </>
           }
-        </div>
+          {/* </div> */}
+        </Toggle>
       </div>
     </Layout>
   )
