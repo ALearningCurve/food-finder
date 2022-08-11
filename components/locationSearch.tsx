@@ -5,7 +5,7 @@ export default function LocationSearch({ callback, instantSearch }: { callback: 
 
     const [location, setLocation] = useState<GeolocationPosition | null>();
     const [errorMessage, setErrorMessage] = useState<String>();
-    const [submitBtn, setSubmitBtn] = useState<HTMLButtonElement>();
+    const [submitBtn, setSubmitBtn] = useState<HTMLButtonElement | null>();
 
     useEffect(() => {
         if (navigator && "geolocation" in navigator) {
