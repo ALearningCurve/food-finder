@@ -24,7 +24,7 @@ const Home: NextPage = () => {
         </div>
         <Toggle visable={!queryData} name="Search Options">
           {/* <div className="flex flex-col items-center justify-center"> */}
-          <LocationSearch callback={(_: QueryData) => setQueryData(_)}></LocationSearch>
+          <LocationSearch callback={(_: QueryData) => setQueryData(_)} instantSearch></LocationSearch>
           {/* </div> */}
         </Toggle>
         {queryData &&

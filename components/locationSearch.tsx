@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import QueryData from '../interfaces/QueryData';
 
-export default function LocationSearch({ callback }: { callback: (_: QueryData) => any }) {
+export default function LocationSearch({ callback, instantSearch }: { callback: (_: QueryData) => any, instantSearch?: boolean }) {
 
     const [location, setLocation] = useState<GeolocationPosition | null>();
-    const [locationAddress, setLocationAddress] = useState<string>();
+    const [errorMessage, setErrorMessage] = useState<String>();
+    const [submitBtn, setSubmitBtn] = useState<HTMLButtonElement>();
 
     useEffect(() => {
         if (navigator && "geolocation" in navigator) {
@@ -13,7 +14,9 @@ export default function LocationSearch({ callback }: { callback: (_: QueryData) 
                 console.log("Latitude is :", position.coords.latitude);
                 console.log("Longitude is :", position.coords.longitude);
                 setLocation(position);
-                getLocationAddress(position);
+                // here we technically have all the information we need in our form to submit the form
+                // because we have the location
+
             }, (err) => {
                 console.warn("could not use geolocation (denied privelage)");
                 setLocation(null);
@@ -26,17 +29,20 @@ export default function LocationSearch({ callback }: { callback: (_: QueryData) 
     }, []);
 
     useEffect(() => {
-        if (location) {
-            const c = location.coords;
-            setLocationAddress(`${c.latitude},${c.longitude}`);
+        if (location == null) {
+            setErrorMessage("Could not automatically determine location, please enter your longitude and latitude");
         } else {
-            setLocationAddress("");
+            setErrorMessage(undefined);
         }
-    }, [location])
+    }, [location]);
 
-    const getLocationAddress = (position: GeolocationPosition) => {
+    useEffect(() => {
+        if (instantSearch && submitBtn && location) {
+            submitBtn.click();
+        }
+    }, [location, submitBtn, instantSearch])
 
-    }
+
 
     // Make a copy of the categories and copy it
 
@@ -63,7 +69,7 @@ export default function LocationSearch({ callback }: { callback: (_: QueryData) 
         if (locatedWithin && Number.isInteger(locatedWithin)) {
             qd.locatedWithin = Number.parseInt(locatedWithin) * 1000
         }
-
+        setErrorMessage(undefined);
         callback(qd);
     };
 
@@ -73,11 +79,15 @@ export default function LocationSearch({ callback }: { callback: (_: QueryData) 
         </div>);
     }
 
+    const locationAddress = location ? `${location.coords.latitude},${location.coords.longitude}` : "";
+
 
     return (
         <div className="w-full max-w-xs">
-
             <form className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4' onSubmit={handleSubmit}>
+                {errorMessage && <div className='text-red-800'>
+                    <span>ERROR:</span> <span>{errorMessage}</span>
+                </div>}
                 <div className="mb-3">
                     <label className='block text-gray-700 text-m font-bold mb-2' htmlFor='location'>
                         Location (LAT,LONG):
@@ -122,7 +132,7 @@ export default function LocationSearch({ callback }: { callback: (_: QueryData) 
                 </div>
 
                 <div className='flex items-center justify-center mt-5'>
-                    <button className='block text-m text-white shadow border rounded bg-blue-500 focus:shadow-outline p-2' type="submit" value="Submit"> Lets Eat! </button>
+                    <button className='block text-m text-white shadow border rounded bg-blue-500 focus:shadow-outline p-2' type="submit" value="Submit" ref={input => setSubmitBtn(input)}> Lets Eat! </button>
                 </div>
             </form>
         </div>
