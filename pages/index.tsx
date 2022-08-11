@@ -17,23 +17,22 @@ const Home: NextPage = () => {
 
   return (
     <Layout home>
-      <div>
+      <div className='container'>
         <div className='mb-5'>
-
           <h1 className='text-2xl leading-loose font-extrabold'>Where to Eat?</h1>
           <p className='text-grey-800'>Fill out this form to find out</p>
         </div>
         <Toggle visable={!queryData} name="Search Options">
           {/* <div className="flex flex-col items-center justify-center"> */}
           <LocationSearch callback={(_: QueryData) => setQueryData(_)}></LocationSearch>
-          {queryData &&
-            <>
-              <hr className='border-t-8 bg-black w-12 h-1' />
-              <LocationResults queryData={queryData}></LocationResults>
-            </>
-          }
           {/* </div> */}
         </Toggle>
+        {queryData &&
+          <>
+            <hr className='border-t-8 bg-black w-full h-1 m-3' />
+            <LocationResults queryData={queryData}></LocationResults>
+          </>
+        }
       </div>
     </Layout>
   )

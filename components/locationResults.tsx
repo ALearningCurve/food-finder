@@ -57,7 +57,7 @@ export default function LocationResults(props: { queryData: QueryData }) {
 
     return (
         <div>
-            <h1>Results</h1>
+            <h1 className="text-2xl leading-loose font-extrabold">Results</h1>
             <ul>
                 {locations.map(l => <li key={l.website}>
                     <LocationInformation location={l} ></LocationInformation>
