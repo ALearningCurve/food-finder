@@ -1,6 +1,6 @@
-import LocationInformation from "./locationInformation";
-import { Location } from "../interfaces/Location";
-import QueryData from "../interfaces/QueryData";
+import LocationInformation from "../location/locationInformation";
+import { Location } from "../../interfaces/Location";
+import QueryData from "../../interfaces/QueryData";
 import { useEffect, useState } from "react";
 
 export default function LocationResults(props: { queryData: QueryData }) {
@@ -52,7 +52,7 @@ export default function LocationResults(props: { queryData: QueryData }) {
     }
 
     if (locations == undefined || locations.length == 0) {
-        return (<h1>No Results 😢</h1>)
+        return (<h1>No Food Near You 😢</h1>)
     }
 
     return (
