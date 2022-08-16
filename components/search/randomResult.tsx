@@ -17,7 +17,7 @@ export default function RandomResult({ whenDone, locations }: { whenDone: () => 
     return (
         <div>
             <LocationInformation location={randomLocations[index]}></LocationInformation>
-            <button onClick={incrementIndex}>next</button>
+            <button className="border rounded text-white bg-green-800 p-3" onClick={incrementIndex}>Next Result</button>
         </div>
     );
 }
