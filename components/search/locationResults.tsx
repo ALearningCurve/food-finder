@@ -2,6 +2,7 @@ import LocationInformation from "../location/locationInformation";
 import { Location } from "../../interfaces/Location";
 import QueryData from "../../interfaces/QueryData";
 import { useEffect, useState } from "react";
+import AllResults from "./allResults";
 
 export default function LocationResults(props: { queryData: QueryData }) {
     const { queryData } = props;
@@ -58,11 +59,7 @@ export default function LocationResults(props: { queryData: QueryData }) {
     return (
         <div>
             <h1 className="text-2xl leading-loose font-extrabold">Results</h1>
-            <ul>
-                {locations.map(l => <li key={l.website}>
-                    <LocationInformation location={l} ></LocationInformation>
-                </li>)}
-            </ul>
+            <AllResults locations={locations}></AllResults>
         </div>
     )
 }
