@@ -13,10 +13,11 @@ export default function RandomResult({ whenDone, locations }: { whenDone: () => 
         }
     }, [index, randomLocations, whenDone])
 
+    const incrementIndex = () => setIndex(index + 1);
     return (
         <div>
             <LocationInformation location={randomLocations[index]}></LocationInformation>
-            <button onClick={e => setIndex(index + 1)}>next</button>
+            <button onClick={incrementIndex}>next</button>
         </div>
     );
 }

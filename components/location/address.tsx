@@ -1,8 +1,13 @@
 import { Address } from "../../interfaces/Location";
 
-export default function SimpleAddress(props: { address: Address }) {
-    const { formattedAddress } = props.address
+
+export default function SimpleAddress({ address }: { address: Address }) {
+    const { formattedAddress } = address
+    // make displaying the address its own component just in case if in the future the address becomes
+    // something that must be displayed differently
     return (
-        <p>{formattedAddress}</p>
+        <div>
+            <p>{formattedAddress}</p>
+        </div>
     )
 }

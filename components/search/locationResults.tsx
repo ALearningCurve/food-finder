@@ -3,17 +3,26 @@ import { Location } from "../../interfaces/Location";
 import QueryData from "../../interfaces/QueryData";
 import { useEffect, useState } from "react";
 import AllResults from "./allResults";
+import RandomResult from "./randomResult";
 
 export default function LocationResults(props: { queryData: QueryData }) {
     const { queryData } = props;
+    // Keep track of all the locations for the given query data returned by the API
     const [locations, setLocations] = useState<Location[]>();
+    // Whether or not the api is loading
     const [isLoading, setIsLoading] = useState<Boolean>(true);
+    // if an error has occured while fetching the locations from the API display it here
     const [error, setError] = useState<Boolean>(false);
+    // whether or not the use has already viewed all the results that have been returned from the API
+    const [areResultsDepleted, setAreResultsDepleted] = useState(false);
 
-
+    // Every time new query data arrives, get the new locations from the API
     useEffect(() => {
-        console.log(queryData)
         setIsLoading(true);
+        setAreResultsDepleted(false);
+        setError(false);
+
+        // fetch data from api
         fetch('/api/map/search', {
             body: JSON.stringify(queryData),
             headers: {
@@ -22,6 +31,7 @@ export default function LocationResults(props: { queryData: QueryData }) {
             method: 'POST'
         })
             .then((res) => {
+                // if HTTP status is not OK, then throw an error (fetch does not throw error for bad HTTP status)
                 if (res.ok) {
                     return res.json();
                 }
@@ -43,7 +53,6 @@ export default function LocationResults(props: { queryData: QueryData }) {
     }, [queryData])
 
 
-
     if (isLoading) {
         return <h1>Loading...</h1>;
     }
@@ -59,7 +68,13 @@ export default function LocationResults(props: { queryData: QueryData }) {
     return (
         <div>
             <h1 className="text-2xl leading-loose font-extrabold">Results</h1>
-            <AllResults locations={locations}></AllResults>
+            {/* While the user has not viewed all the locations, we want them to 
+            randomly view them, but after viewing all the locations we want to display the 
+            locations in a list */}
+            {areResultsDepleted ?
+                <AllResults locations={locations}></AllResults> :
+                <RandomResult locations={locations} whenDone={() => setAreResultsDepleted(true)}></RandomResult>
+            }
         </div>
     )
 }
