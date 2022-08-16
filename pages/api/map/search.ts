@@ -33,7 +33,7 @@ export default async function handler(
         location = "userCircularMapView=" + body.location + "," + Math.min(Math.round(body.locatedWithin ?? max), max)
     }
 
-    const url = `${process.env.BING_SEARCH_URL}?type=${type}&${location}&key=${process.env.BING_KEY}`;
+    const url = `${process.env.BING_SEARCH_URL}?type=${type}&${location}&maxResults=25&key=${process.env.BING_KEY}`;
 
     try {
         const bingRes = await fetch(url);

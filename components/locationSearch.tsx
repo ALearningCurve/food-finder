@@ -51,7 +51,8 @@ export default function LocationSearch({ callback, instantSearch }: { callback: 
         // values from the form
         const values = e.target.elements;
         // get each field in the form as a variable
-        const onlyVegetarian = values.onlyVegetarian.value;
+        const onlyVegetarian = values.onlyVegetarian.checked;
+        console.log(onlyVegetarian)
         const price = values.price.value;
         const rating = values.rating.value;
         // remove any whitespace
