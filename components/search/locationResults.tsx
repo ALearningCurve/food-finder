@@ -68,13 +68,17 @@ export default function LocationResults(props: { queryData: QueryData }) {
     return (
         <div>
             <h1 className="text-2xl leading-loose font-extrabold">Results</h1>
+            <p>Down below see the restaurants near you presented randomly one at a time. Once you see every restaurant, all the restaurants will be shown at once.</p>
             {/* While the user has not viewed all the locations, we want them to 
             randomly view them, but after viewing all the locations we want to display the 
             locations in a list */}
+            <div className="mt-4">
+
             {areResultsDepleted ?
                 <AllResults locations={locations}></AllResults> :
                 <RandomResult locations={locations} whenDone={() => setAreResultsDepleted(true)}></RandomResult>
             }
+            </div>
             <sub className="text-grey">Found {locations.length} restaurants near you matching your search criteria!</sub>
         </div>
     )

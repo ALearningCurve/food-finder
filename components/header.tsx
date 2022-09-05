@@ -1,17 +1,8 @@
 export default function Header() {
     return <div className="flex flex-row space-x-3 px-3">
-        <a>
-            {/* place to display the main search bar */}
-            Home
-        </a>
-        <a>
-            {/* display the places you have recently been to */}
-            Recent Places
-        </a>
-        <a>
-            {/* log into an account */}
-            Log In
-        </a>
+        <h1 className="text-3xl text-white font-extrabold py-2">
+            Food Finder: Randomly Find Food Near You!
+        </h1>
 
     </div>
 }

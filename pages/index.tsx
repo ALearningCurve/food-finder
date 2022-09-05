@@ -19,14 +19,18 @@ const Home: NextPage = () => {
     <Layout home>
       <div className='container'>
         <div className='mb-5'>
-          <h1 className='text-2xl leading-loose font-extrabold'>Where to Eat?</h1>
-          <p className='text-grey-800'>Fill out this form to find out</p>
+          <p>Can&apos;t decide what to eat? Let us choose for you! Using your location we will automatically find restaurants 
+            near you and then present them in a random order so you don&apos;t have to decide! You can change the search settings in the form below!</p>
         </div>
-        <Toggle visable={!queryData} name="Search Options">
-          {/* <div className="flex flex-col items-center justify-center"> */}
-          <LocationSearch callback={(_: QueryData) => setQueryData(_)} instantSearch></LocationSearch>
-          {/* </div> */}
-        </Toggle>
+        <div className='mb-5'>
+          <h1 className='text-2xl leading-loose font-extrabold'>Search Options</h1>
+          <p className='text-grey-800'>Change locations and food preferences used in the search</p>
+          <Toggle visable={!queryData} name="Search Options">
+            {/* <div className="flex flex-col items-center justify-center"> */}
+            <LocationSearch callback={(_: QueryData) => setQueryData(_)} instantSearch></LocationSearch>
+            {/* </div> */}
+          </Toggle>
+        </div>
         {queryData &&
           <>
             <hr className='border-t-8 bg-black w-full h-1 m-3' />
