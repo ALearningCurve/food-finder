@@ -53,8 +53,8 @@ export default function LocationSearch({ callback, instantSearch }: { callback: 
         // get each field in the form as a variable
         const onlyVegetarian = values.onlyVegetarian.checked;
         console.log(onlyVegetarian)
-        const price = values.price.value;
-        const rating = values.rating.value;
+        const price = values.price?.value ?? 'Any';
+        const rating = values.rating?.value ?? '1';
         // remove any whitespace
         const location = (values.location.value as string).replaceAll(" ", "");
         const locatedWithin: string = values?.location?.locatedWithin
@@ -104,7 +104,9 @@ export default function LocationSearch({ callback, instantSearch }: { callback: 
                     <input className="w-full" type="range" min="1" max="5" defaultValue={5} id="distance" />
                 </div>
 
-                <div className="mb-3">
+                {/* Minimum Price and rating are not supported by the location API. We will have to use another API for this data 
+                Which has not yet been implemented into the API of this project. So temporaily disable these fields. */}
+                {/* <div className="mb-3">
                     <label className='block text-gray-700 text-m font-bold mb-2' htmlFor='rating'>
                         Minimum Rating:
                     </label>
@@ -122,7 +124,7 @@ export default function LocationSearch({ callback, instantSearch }: { callback: 
                         <option value="$$">$$</option>
                         <option value="$$$">$$$</option>
                     </select>
-                </div>
+                </div> */}
                 <div className="mb-3 flex flex-row">
                     <label className='block text-gray-700 text-m font-bold mb-2' >
                         Must be Vegetarian?
