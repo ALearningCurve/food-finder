@@ -75,6 +75,7 @@ export default function LocationResults(props: { queryData: QueryData }) {
                 <AllResults locations={locations}></AllResults> :
                 <RandomResult locations={locations} whenDone={() => setAreResultsDepleted(true)}></RandomResult>
             }
+            <sub className="text-grey">Found {locations.length} restaurants near you matching your search criteria!</sub>
         </div>
     )
 }
