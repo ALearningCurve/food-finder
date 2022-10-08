@@ -10,12 +10,18 @@ import LocationResults from "../components/search/locationResults";
 import { Location } from "../interfaces/Location";
 import Toggle from "../components/toggle";
 
+/**
+ * A page that holds all the information needed to run and interact with the food finder application.
+ * @returns JSX page for the entire food finders app.
+ */
 const Home: NextPage = () => {
+  // manange the state when the query data is updated every time the user submits the form
   const [queryData, setQueryData] = useState<QueryData>();
 
   return (
-    <Layout home>
+    <Layout>
       <div className="container">
+        {/* Blurb about the page */}
         <div className="mb-5 border-b-4 pb-5">
           <p>
             Can&apos;t decide what to eat? Let us choose for you! Using your
@@ -25,6 +31,7 @@ const Home: NextPage = () => {
           </p>
         </div>
 
+        {/* search form */}
         <div className="mb-5 border-b-4 pb-5">
           <h1 className="text-2xl leading-loose font-extrabold">
             Search Options
@@ -42,6 +49,7 @@ const Home: NextPage = () => {
           </Toggle>
         </div>
 
+        {/* if the query data has been gathered by the user, then we want to display the results of the query data */}
         {queryData && <LocationResults queryData={queryData}></LocationResults>}
       </div>
     </Layout>
