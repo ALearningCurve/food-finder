@@ -139,7 +139,8 @@ export default function LocationSearchForm({
             className="block text-gray-700 text-m font-bold mb-2"
             htmlFor="location"
           >
-            Location (LAT,LONG):
+            <p>Location:</p>
+            <sub>(Latitude, Longitude)</sub>
           </label>
           <textarea
             className="bg-gray-50 border rounded text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 w-full"
@@ -154,7 +155,8 @@ export default function LocationSearchForm({
             className="block text-gray-700 text-m font-bold mb-2"
             htmlFor="distance"
           >
-            Maximum Distance (KM):
+            <p>Maximum Distance:</p>
+            <sub>(From 1 to 5 KM Away From You)</sub>
           </label>
           <input
             className="w-full"

@@ -44,7 +44,7 @@ export default function Toggle(props: {
           <h1 className="ml-3">{props.name}</h1>
         </div>
       </div>
-      <div className={"ml-3 my-4 " + (visable ? "" : "hidden")}>
+      <div className={"ml-3 my-4 border " + (visable ? "" : "hidden")}>
         {props.children}
       </div>
     </div>
