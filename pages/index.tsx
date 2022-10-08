@@ -36,9 +36,6 @@ const Home: NextPage = () => {
 
         {/* search form */}
         <div className="mb-5 border-b-4 pb-5">
-          <h1 className="text-2xl leading-loose font-extrabold">
-            Search Options
-          </h1>
           <Toggle visable={!queryData} name="Reveal Form">
             {/* <div className="flex flex-col items-center justify-center"> */}
             <LocationSearchForm

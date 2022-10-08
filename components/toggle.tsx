@@ -26,25 +26,35 @@ export default function Toggle(props: {
     setVisable(props.visable);
   }, [props.visable]);
 
-  const style = {
+  const arrowStyle = {
     transform: visable ? "rotate(90deg)" : "rotate(0deg)",
-    transition: "transform 150ms ease", // smooth transition
+    "transform-origin": "center center",
+    transition: "transform 200ms ease", // smooth transition
+  };
+
+  const togglableContentStyle = {
+    "max-height": visable ? "1000px" : "0px",
+    opacity: visable ? 1 : 0,
+    transition: "all 400ms ease", // smooth transition
+    overflow: "hidden",
   };
 
   return (
     <div>
-      <div
-        className="bg-blue-400 border rounded p-1 pl-3"
-        onClick={handleVisabilityToggle}
-      >
-        <div className="flex flex-row">
-          <div style={style}>
-            <span>&#x3e;</span>
+      <div onClick={handleVisabilityToggle}>
+        <h1 className="text-2xl leading-loose font-extrabold">
+          <div className="flex flex-row">
+            {props.name}
+            <div className="ml-3" style={arrowStyle}>
+              <span>&#x3e;</span>
+            </div>
           </div>
-          <h1 className="ml-3">{props.name}</h1>
-        </div>
+        </h1>
       </div>
-      <div className={"ml-3 my-4 border " + (visable ? "" : "hidden")}>
+      <div
+        className={"ml-3 my-4 border-l-4 border-blue-400"}
+        style={togglableContentStyle}
+      >
         {props.children}
       </div>
     </div>
