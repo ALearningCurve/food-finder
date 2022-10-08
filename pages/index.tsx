@@ -23,6 +23,9 @@ const Home: NextPage = () => {
       <div className="container">
         {/* Blurb about the page */}
         <div className="mb-5 border-b-4 pb-5">
+          <h1 className="text-2xl leading-loose font-extrabold">
+            What is This Tool For
+          </h1>
           <p>
             Can&apos;t decide what to eat? Let us choose for you! Using your
             location we will automatically find restaurants near you and then

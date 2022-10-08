@@ -126,7 +126,7 @@ export default function LocationSearchForm({
   return (
     <div className="w-full max-w-xs">
       <form
-        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+        className="bg-white rounded px-8 pt-6 pb-8 mb-4"
         onSubmit={handleSubmit}
       >
         {errorMessage && (
@@ -142,7 +142,7 @@ export default function LocationSearchForm({
             Location (LAT,LONG):
           </label>
           <textarea
-            className="bg-gray-50 shadow border rounded text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 w-full"
+            className="bg-gray-50 border rounded text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 w-full"
             id="location"
             name="location"
             defaultValue={locationAddress ?? ""}
@@ -180,7 +180,7 @@ export default function LocationSearchForm({
                     <label className='block text-gray-700 text-m font-bold mb-2' htmlFor='price'>
                         Price:
                     </label>
-                    <select className='bg-gray-50 shadow border rounded text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2' id="price" name="price">
+                    <select className='bg-gray-50  border rounded text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2' id="price" name="price">
                         <option value="Any">Any</option>
                         <option value="$">$</option>
                         <option value="$$">$$</option>
@@ -193,7 +193,7 @@ export default function LocationSearchForm({
           </label>
           <div className="w-full"></div>
           <input
-            className="bg-gray-50 shadow border rounded text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2"
+            className="bg-gray-50 border rounded text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2"
             id="onlyVegetarian"
             name="onlyVegetarian"
             type={"checkbox"}
@@ -203,7 +203,7 @@ export default function LocationSearchForm({
 
         <div className="flex items-center justify-center mt-5">
           <button
-            className="block text-m text-white shadow border rounded bg-blue-500 focus:shadow-outline p-2"
+            className="block text-m text-white  border rounded bg-blue-500  p-2"
             type="submit"
             value="Submit"
             ref={(input) => setSubmitBtn(input)}

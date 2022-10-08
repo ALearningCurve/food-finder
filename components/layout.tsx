@@ -18,8 +18,8 @@ export default function Layout({ children }: { children: JSX.Element }) {
       <header className="bg-blue-500">
         <Header></Header>
       </header>
-      <main className="min-h-screen p-3">
-        <div className="container">{children}</div>
+      <main className="min-h-screen container-md mx-auto px-4 pt-4">
+        <div>{children}</div>
       </main>
     </div>
   );
