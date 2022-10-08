@@ -20,7 +20,8 @@ export default function LocationSearchForm({
   // set up state in the component
   // We use null value to represent no location could be found, undefined value to represent
   // that location has yet to be loaded by the Browser API
-  const [location, setLocation] = useState<GeolocationPosition | null>();
+  const [browserLocation, setBrowserLocation] =
+    useState<GeolocationPosition | null>();
   const [errorMessage, setErrorMessage] = useState<String>();
   const [submitBtn, setSubmitBtn] = useState<HTMLButtonElement | null>();
 
@@ -33,39 +34,39 @@ export default function LocationSearchForm({
         (position) => {
           console.log("Latitude is :", position.coords.latitude);
           console.log("Longitude is :", position.coords.longitude);
-          setLocation(position);
+          setBrowserLocation(position);
         },
         (err) => {
           console.warn("could not use geolocation (denied privelage)");
-          setLocation(null);
+          setBrowserLocation(null);
         }
       );
     } else {
       console.warn("could not use geolocation");
-      setLocation(null);
+      setBrowserLocation(null);
     }
   }, []);
 
   // Every time that the location is updated, we want to display diagnositc information to the user
-  // if the
+  // if the value could succcessfully be gotten or not
   useEffect(() => {
-    if (location == null) {
+    if (browserLocation == null) {
       setErrorMessage(
         "Could not automatically determine location, please enter your longitude and latitude"
       );
     } else {
       setErrorMessage(undefined);
     }
-  }, [location]);
+  }, [browserLocation]);
 
   // once we have the location, we have all the information we need to submit.
   // so, if we have instantSearch enabled, we attempt to click the submit button to instantly
   // search.
   useEffect(() => {
-    if (instantSearch && submitBtn && location) {
+    if (instantSearch && submitBtn && browserLocation) {
       submitBtn.click();
     }
-  }, [location, submitBtn, instantSearch]);
+  }, [browserLocation, submitBtn, instantSearch]);
 
   /**
    * Handle the submission of this form. Reads values from the form and uses those
@@ -108,7 +109,7 @@ export default function LocationSearchForm({
 
   // if the location has yet to be gathered by the location API (AKA undefined)
   // then display loading until browser API returns location
-  if (location === undefined) {
+  if (browserLocation === undefined) {
     return (
       <div>
         <h1>Loading...</h1>
@@ -118,8 +119,8 @@ export default function LocationSearchForm({
 
   // format location from the Browser API into a human readable format
   // this value is used as a default in the form
-  const locationAddress = location
-    ? `${location.coords.latitude},${location.coords.longitude}`
+  const locationAddress = browserLocation
+    ? `${browserLocation.coords.latitude},${browserLocation.coords.longitude}`
     : "";
 
   return (
